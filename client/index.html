@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncNode | Workforce OS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div id="login-overlay" class="overlay">
+        <div class="glass login-card">
+            <h2>SyncNode Login</h2>
+            <input type="email" id="email" placeholder="Email" class="glass-input" autocomplete="email">
+            <input type="password" id="password" placeholder="Password" class="glass-input" autocomplete="current-password">
+            <button onclick="handleLogin()" class="action-btn">Initialize Session</button>
+        </div>
+    </div>
+
+    <div id="task-modal" class="overlay" style="display:none; z-index:1000;">
+        <div class="glass login-card">
+            <h2 id="modal-employee-name">Assign Task</h2>
+            <input type="hidden" id="modal-employee-id">
+            <input type="text" id="task-title" placeholder="Task Title" class="glass-input">
+            <input type="datetime-local" id="task-deadline" class="glass-input">
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button onclick="submitTask()" class="action-btn">Assign</button>
+                <button onclick="closeTaskModal()" class="action-btn" style="background:#555;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <div class="app-container">
+        <aside class="glass sidebar">
+            <h2>SyncNode</h2>
+            <div class="user-info">
+                <div id="pulse-dot" class="dot"></div>
+                <span id="user-name-display">Not Authenticated</span>
+            </div>
+            <hr class="divider">
+            <nav class="nav-menu">
+                <button onclick="showPage('dashboard')" class="nav-link">🏠 Dashboard</button>
+                <button onclick="showPage('office')" class="nav-link">📁 My Office</button>
+                
+                <div id="admin-nav" class="admin-only" style="display:none;">
+                    <p class="nav-label">CONTROL ROOM</p>
+                    <button onclick="showPage('admin-workforce')" class="nav-link">👥 Workforce</button>
+                    <button onclick="showPage('admin-approvals')" class="nav-link">📋 Approvals</button>
+                </div>
+
+                <hr class="divider">
+                <button onclick="updatePulse('Available')" class="nav-link">Available</button>
+                <button onclick="updatePulse('Deep Work')" class="nav-link">Deep Work</button>
+                <button onclick="logout()" class="nav-link logout">Exit System</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="page-dashboard" class="page-content">
+                <header class="glass top-bar">
+                    <h1>System Overview</h1>
+                </header>
+                <div class="dashboard-grid">
+                    <div class="glass card"><canvas id="radarChart"></canvas></div>
+                    <div class="glass card"><h3>Talent Hub</h3><div id="talent-grid"></div></div>
+                </div>
+            </section>
+
+            <section id="page-office" class="page-content" style="display:none;">
+                <header class="glass top-bar"><h1>My Office</h1></header>
+                <div class="dashboard-grid">
+                    <div class="glass card">
+                        <h3>My Tasks</h3>
+                        <div id="my-tasks-list"></div>
+                    </div>
+                    <div class="glass card">
+                        <h3>Request Leave</h3>
+                        <input type="number" id="leave-days" placeholder="Days" class="glass-input">
+                        <input type="text" id="leave-reason" placeholder="Reason" class="glass-input">
+                        <button onclick="submitLeave()" class="action-btn">Submit</button>
+                        <hr class="divider" style="margin: 20px 0;">
+                        <h3>Leave History</h3>
+                        <div id="employee-leave-history"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-admin-workforce" class="page-content" style="display:none;">
+                <header class="glass top-bar">
+                    <h1>Workforce Management</h1>
+                    <div class="burn-badge">Annual Burn: <span id="burn-rate">$0</span></div>
+                </header>
+                <div class="glass card" style="margin-top:20px">
+                    <h3>Employee Directory</h3>
+                    <div id="admin-employee-table"></div>
+                </div>
+            </section>
+
+            <section id="page-admin-approvals" class="page-content" style="display:none;">
+                <header class="glass top-bar"><h1>Approval Queue</h1></header>
+                <div class="glass card" style="margin-top:20px">
+                    <h3>Pending Requests</h3>
+                    <div id="admin-leave-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
