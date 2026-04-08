@@ -64,8 +64,8 @@ ChartJS.register(
   Legend,
 );
 
-const API_URL = "http://localhost:5000/api";
-const SOCKET_URL = "http://localhost:5000";
+const API_URL = "https://syncnodeems.onrender.com/api";
+const SOCKET_URL = "https://syncnodeems.onrender.com";
 
 export default function AdminDashboard({ token, user, showToast, logout }) {
   const [currentPage, setCurrentPage] = useState("dashboard");

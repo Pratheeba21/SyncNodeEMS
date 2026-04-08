@@ -8,7 +8,7 @@ import {
   Tooltip as RechartsTooltip,
 } from "recharts";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://syncnodeems.onrender.com/api";
 
 function TaskCenter({ token, showToast }) {
   const [tasks, setTasks] = useState([]);

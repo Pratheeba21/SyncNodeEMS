@@ -519,7 +519,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ChevronLeft, ChevronRight, Edit3, X, Send } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://syncnodeems.onrender.com/api";
 
 export default function EODReportTab({ token, user, showToast }) {
   // --- State ---

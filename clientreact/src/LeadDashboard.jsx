@@ -365,8 +365,8 @@ import EODReportTab from "./EODReportTab";
 import ChatDrawer from "./ChatDrawer";
 // Ensure this matches your file name
 
-const API_URL = "http://localhost:5000/api";
-const SOCKET_URL = "http://localhost:5000";
+const API_URL = "https://syncnodeems.onrender.com/api";
+const SOCKET_URL = "https://syncnodeems.onrender.com";
 
 export default function LeadDashboard({ token, user, showToast, logout }) {
   const [currentPage, setCurrentPage] = useState("dashboard");
